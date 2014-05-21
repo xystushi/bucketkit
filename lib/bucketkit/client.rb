@@ -1,7 +1,14 @@
+require 'sawyer'
+require 'bucketkit/authentication'
+require 'bucketkit/configurable'
+require 'bucketkit/repository'
+require 'bucketkit/client/pull_requests'
+
 module Bucketkit
   class Client
     include Bucketkit::Authentication
     include Bucketkit::Configurable
+    include Bucketkit::Client::PullRequests
 
     CONVENIENCE_HEADERS = Set.new([:accept, :content_type])
 
@@ -9,6 +16,10 @@ module Bucketkit
       Bucketkit::Configurable.keys.each do |key|
         instance_variable_set(:"@#{key}", options[key] || Bucketkit.instance_variable_get(:"@#{key}"))
       end
+    end
+
+    def same_options?(opts)
+      opts.hash == options.hash
     end
 
     def get(url, options={})
@@ -74,8 +85,8 @@ module Bucketkit
         http.headers[:user_agent] = user_agent
         if basic_authenticated?
           http.basic_auth(@login, @password)
-        elsif token_authenticated?
-          http.authorization 'token', @access_token
+        elsif oauth_authenticated?
+          http.token_auth @oauth_tokens
         end
       end
     end

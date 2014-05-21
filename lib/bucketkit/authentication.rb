@@ -4,12 +4,12 @@ module Bucketkit
       !!(@login && @password)
     end
 
-    def token_authenticated?
-      !!@access_token
+    def oauth_authenticated?
+      !!@oauth_tokens
     end
 
     def user_authenticated?
-      basic_authenticated? || token_authenticated?
+      basic_authenticated? || oauth_authenticated?
     end
   end
 end
