@@ -1,6 +1,6 @@
 module Bucketkit
   module Configurable
-    attr_accessor :oauth_tokens, :client_id, :client_secret,
+    attr_accessor :oauth_tokens,
                   :connection_options, :default_media_type,
                   :middleware, :proxy, :user_agent
     attr_writer :password, :login, :web_endpoint, :api_endpoint

@@ -3,6 +3,8 @@ require 'bucketkit/authentication'
 require 'bucketkit/configurable'
 require 'bucketkit/repository'
 require 'bucketkit/client/pull_requests'
+require 'faraday_middleware'
+require 'pry'
 
 module Bucketkit
   class Client
@@ -64,19 +66,9 @@ module Bucketkit
       @password = value
     end
 
-    def access_token=(value)
+    def oauth_tokens=(value)
       reset_agent
-      @access_token = value
-    end
-
-    def client_id=(value)
-      reset_agent
-      @client_id = value
-    end
-
-    def client_secret=(value)
-      reset_agent
-      @client_secret = value
+      @oauth_tokens = value
     end
 
     def agent
@@ -86,7 +78,7 @@ module Bucketkit
         if basic_authenticated?
           http.basic_auth(@login, @password)
         elsif oauth_authenticated?
-          http.token_auth @oauth_tokens
+          http.request :oauth, @oauth_tokens
         end
       end
     end
@@ -121,7 +113,7 @@ module Bucketkit
       conn_opts = @connection_options
       conn_opts[:builder] = @middleware if @middleware
       conn_opts[:proxy] = @proxy if @proxy
-      opts[:faraday] = Faraday.new(conn_opts)
+      opts[:faraday] = Faraday.new('https://api.bitbucket.org', conn_opts)
 
       opts
     end

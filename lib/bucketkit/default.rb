@@ -26,7 +26,7 @@ module Bucketkit
             consumer_key: ENV['BUCKETKIT_CONSUMER_KEY'],
             consumer_secret: ENV['BUCKETKIT_CONSUMER_SECRET'],
             token: ENV['BUCKETKIT_TOKEN'],
-            token_secret: ENV['BUCKETKIT_CONSUMER_SECRET']
+            token_secret: ENV['BUCKETKIT_TOKEN_SECRET']
         }
       end
 
