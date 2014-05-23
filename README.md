@@ -1,6 +1,6 @@
 # Bucketkit
 
-TODO: Write a gem description
+BucketKit is a BitBucket REST API client that is heavily inspired by [Octokit](octokit.github.io).
 
 ## Installation
 
@@ -22,7 +22,7 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/bucketkit/fork )
+1. Fork it ( http://github.com/xystushi/bucketkit/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
