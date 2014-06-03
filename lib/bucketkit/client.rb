@@ -4,7 +4,6 @@ require 'bucketkit/configurable'
 require 'bucketkit/repository'
 require 'bucketkit/client/pull_requests'
 require 'faraday_middleware'
-require 'pry'
 
 module Bucketkit
   class Client
