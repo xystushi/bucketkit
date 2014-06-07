@@ -41,6 +41,7 @@ module Bucketkit
       def connection_options
         {
             headers: {
+                content_type: default_media_type,
                 accept: default_media_type,
                 user_agent: user_agent
             }
