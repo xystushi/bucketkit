@@ -62,6 +62,15 @@ module Bucketkit
           builder.adapter Faraday.default_adapter
         end
       end
+
+      def auto_paginate
+        ENV['BUCKETKIT_AUTO_PAGINATE']
+      end
+
+      def per_page
+        page_size = ENV['BUCKETKIT_PER_PAGE']
+        page_size.to_i if page_size
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 module Bucketkit
   module Configurable
-    attr_accessor :oauth_tokens,
+    attr_accessor :oauth_tokens, :auto_paginate, :per_page,
                   :connection_options, :default_media_type,
                   :middleware, :proxy, :user_agent
     attr_writer :password, :login, :web_endpoint, :api_endpoint
@@ -9,6 +9,8 @@ module Bucketkit
       def keys
         @keys ||= [
             :oauth_tokens,
+            :auto_paginate,
+            :per_page,
             :api_endpoint,
             :web_endpoint,
             :login,

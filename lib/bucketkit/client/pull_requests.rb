@@ -5,7 +5,7 @@ module Bucketkit
       API_ENDPOINT = 'api/2.0/repositories'.freeze
 
       def pull_requests(repo, options={})
-        get "#{API_ENDPOINT}/#{Repository.new(repo)}/pullrequests", options
+        paginate "#{API_ENDPOINT}/#{Repository.new(repo)}/pullrequests", options
       end
 
       def create_pull_request(repo, title, source, destination='master', options={})
@@ -26,7 +26,7 @@ module Bucketkit
       end
 
       def pull_request_commits(repo, number, options={})
-        get "#{API_ENDPOINT}/#{Repository.new(repo)}/pullrequests/#{number}/commits", options
+        paginate "#{API_ENDPOINT}/#{Repository.new(repo)}/pullrequests/#{number}/commits", options
       end
 
       def approve_pull_request(repo, number, options={})

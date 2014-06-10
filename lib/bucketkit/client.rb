@@ -49,6 +49,26 @@ module Bucketkit
       request :head, url, parse_query_and_convenience_headers(options)
     end
 
+    def paginate(url, options={}, &block)
+      opts = parse_query_and_convenience_headers(options.dup)
+      if @auto_paginate || @per_page
+        opts[:query][:per_page] ||= @per_page || (@auto_paginate ? 100 : nil)
+      end
+      data = request(:get, url, opts)
+      if @auto_paginate
+        loop do
+          break unless @last_response.rels[:next]
+          @last_response = @last_response.rels[:next].get
+          if block_given?
+            yield(data, @last_response)
+          else
+            data.concat(@last_response.data) if @last_response.data.is_a?(Array)
+          end
+        end
+      end
+      data
+    end
+
     def root
       get '/'
     end

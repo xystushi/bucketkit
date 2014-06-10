@@ -5,7 +5,7 @@ module Bucketkit
       API_ENDPOINT = 'api/2.0/repositories'.freeze
 
       def commits(repo, options={})
-        get "#{API_ENDPOINT}/#{Repository.new(repo)}/commits", options
+        paginate "#{API_ENDPOINT}/#{Repository.new(repo)}/commits", options
       end
 
       def commit(repo, revision, options={})
