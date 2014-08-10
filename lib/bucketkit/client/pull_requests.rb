@@ -8,9 +8,10 @@ module Bucketkit
         paginate "#{API_ENDPOINT}/#{Repository.new(repo)}/pullrequests", options
       end
 
-      def create_pull_request(repo, title, source, destination='master', options={})
+      def create_pull_request(repo, title, source, destination, description, options={})
         pull = {
             title: title,
+            description: description,
             source: { branch: { name: source } },
             destination: { branch: { name: destination } }
         }
